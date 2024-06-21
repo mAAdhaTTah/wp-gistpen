@@ -36,7 +36,7 @@ class Database implements HasActions {
 	 *
 	 * @param Repo $repo
 	 */
-	public function add_commit( Repo $repo ) {
+	public function add_repo_commit( Repo $repo ) {
 		$commits = $this->em->find_by( Commit::class, array(
 			'repo_id' => $repo->ID,
 			'with'    => array(
@@ -115,6 +115,21 @@ class Database implements HasActions {
 		} )->to_array();
 
 		$this->em->persist( $new_commit );
+	}
+
+	/**
+	 * Checks if the Repo has changed and creates a new commit if it has.
+	 *
+	 * @param Blob $blob
+	 */
+	public function add_blob_commit( Blob $blob ) {
+		$this->add_repo_commit( $this->em->find( Repo::class, $blob->repo_id, [
+			'with' => [
+				'blobs' => [
+					'with' => 'language',
+				],
+			],
+		] ) );
 	}
 
 	/**
@@ -206,11 +221,19 @@ class Database implements HasActions {
 		return array(
 			array(
 				'hook'   => 'wpgp.create.repo',
-				'method' => 'add_commit',
+				'method' => 'add_repo_commit',
 			),
 			array(
 				'hook'   => 'wpgp.persist.repo',
-				'method' => 'add_commit',
+				'method' => 'add_repo_commit',
+			),
+			array(
+				'hook'   => 'wpgp.create.blob',
+				'method' => 'add_blob_commit',
+			),
+			array(
+				'hook'   => 'wpgp.persist.blob',
+				'method' => 'add_blob_commit',
 			),
 			array(
 				'hook'     => 'post_updated',

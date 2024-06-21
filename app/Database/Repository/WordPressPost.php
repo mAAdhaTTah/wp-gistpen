@@ -254,7 +254,7 @@ class WordPressPost extends AbstractRepository {
 				$blob_data['repo_id'] = $model->get_primary_id();
 				$blob_data['status']  = $model->get_attribute( 'status' );
 
-				$blob = $this->em->create( Blob::class, $blob_data, array(
+				$blob = $this->create( Blob::class, $blob_data, array(
 					'unguarded' => true,
 				) );
 
@@ -338,7 +338,7 @@ class WordPressPost extends AbstractRepository {
 				$blob->status  = $model->get_attribute( 'status' );
 				$blob->reguard();
 
-				$this->em->persist( $blob );
+				$this->persist( $blob );
 			}
 
 			foreach ( $deleted_blobs as $deleted_blob ) {
@@ -389,7 +389,7 @@ class WordPressPost extends AbstractRepository {
 			$states = new Collection( State::class );
 
 			foreach ( $model->states as $state ) {
-				$state = $this->em->persist( $state );
+				$state = $this->persist( $state );
 
 				if ( ! is_wp_error( $state ) ) {
 					$states = $states->add( $state );

@@ -68,6 +68,7 @@ class Repo extends Model implements UsesWordPressPost {
 		'gist_id',
 		'created_at',
 		'updated_at',
+		'commits',
 	);
 
 	/**

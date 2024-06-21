@@ -83,9 +83,14 @@ class CreateTest extends TestCase {
 		$repo = $this->app->make( 'database' )
 			->find( Repo::class, $this->repo->ID, [
 				'with' => [
-					'blobs' => [
+					'blobs'   => [
 						'with' => [
 							'language' => [],
+						],
+					],
+					'commits' => [
+						'with' => [
+							'states' => [],
 						],
 					],
 				],
@@ -108,6 +113,7 @@ class CreateTest extends TestCase {
 			],
 		] );
 		$this->assertSame( $blob->filename, $this->blob->filename );
+		$this->assertCount( 2, $repo->commits );
 	}
 
 	public function test_saves_blob_with_filename_code_and_language() {

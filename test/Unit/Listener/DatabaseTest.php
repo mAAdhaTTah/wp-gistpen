@@ -35,7 +35,6 @@ class DatabaseTest extends TestCase {
 		parent::setUp();
 
 		$this->em       = $this->app->make( EntityManager::class );
-		$this->database = $this->app->make( Database::class );
 	}
 
 	public function test_should_save_when_no_commits_saved() {
@@ -57,7 +56,7 @@ class DatabaseTest extends TestCase {
 			),
 		) );
 
-		$this->database->add_commit( $repo );
+		$this->em->persist( $repo );
 
 		$commits = $this->em->find_by( Commit::class, array(
 			'repo_id' => $repo->ID,
@@ -104,7 +103,7 @@ class DatabaseTest extends TestCase {
 			'with'    => 'states',
 		) );
 
-		$this->database->add_commit( $repo );
+		$this->em->persist( $repo );
 
 		$commits = $this->em->find_by( Commit::class, array(
 			'repo_id' => $repo->ID,
@@ -128,7 +127,7 @@ class DatabaseTest extends TestCase {
 
 		$repo->description = 'New Description';
 
-		$this->database->add_commit( $repo );
+		$this->em->persist( $repo );
 
 		$commits = $this->em->find_by( Commit::class, array(
 			'repo_id' => $repo->ID,
@@ -177,9 +176,9 @@ class DatabaseTest extends TestCase {
 		$blob->repo_id  = $repo->ID;
 		$blob->reguard();
 
-		$repo->blobs = $repo->blobs->add( $blob = $this->em->persist( $blob ) );
+		$repo->blobs = $repo->blobs->add( $blob );
 
-		$this->database->add_commit( $repo );
+		$this->em->persist( $repo );
 
 		$commits = $this->em->find_by( Commit::class, array(
 			'repo_id' => $repo->ID,
@@ -234,7 +233,7 @@ class DatabaseTest extends TestCase {
 
 		$repo->blobs = $repo->blobs->remove_at( 2 );
 
-		$this->database->add_commit( $repo );
+		$this->em->persist( $repo );
 
 		$commits = $this->em->find_by( Commit::class, array(
 			'repo_id' => $repo->ID,
@@ -289,9 +288,9 @@ class DatabaseTest extends TestCase {
 		/** @var Blob $removed_blob */
 		$removed_blob = $repo->blobs->at( 2 );
 
-		$repo->blobs = $repo->blobs->remove_at( 2 )->add( $blob = $this->em->persist( $blob ) );
+		$repo->blobs = $repo->blobs->remove_at( 2 )->add( $blob );
 
-		$this->database->add_commit( $repo );
+		$this->em->persist( $repo );
 
 		$commits = $this->em->find_by( Commit::class, array(
 			'repo_id' => $repo->ID,
@@ -349,9 +348,7 @@ class DatabaseTest extends TestCase {
 
 		$blob->code = 'some new php code';
 
-		$this->em->persist( $blob );
-
-		$this->database->add_commit( $repo );
+		$this->em->persist( $repo );
 
 		$commits = $this->em->find_by( Commit::class, array(
 			'repo_id' => $repo->ID,
@@ -406,9 +403,7 @@ class DatabaseTest extends TestCase {
 
 		$blob->filename = 'new-slug.php';
 
-		$this->em->persist( $blob );
-
-		$this->database->add_commit( $repo );
+		$this->em->persist( $repo );
 
 		$commits = $this->em->find_by( Commit::class, array(
 			'repo_id' => $repo->ID,
@@ -467,7 +462,7 @@ class DatabaseTest extends TestCase {
 			->find_by( Language::class, array( 'slug' => 'js' ) )
 			->first();
 
-		$this->database->add_commit( $repo );
+		$this->em->persist( $repo );
 
 		$commits = $this->em->find_by( Commit::class, array(
 			'repo_id' => $repo->ID,

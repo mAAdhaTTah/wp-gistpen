@@ -5,6 +5,7 @@ namespace Intraxia\Gistpen\Database\Repository;
 use Intraxia\Gistpen\Contract\Repository;
 use Intraxia\Gistpen\Model\Blob;
 use Intraxia\Gistpen\Model\Language;
+use Intraxia\Gistpen\Model\Commit;
 use Intraxia\Gistpen\Model\State;
 use Intraxia\Jaxion\Contract\Axolotl\EntityManager;
 use Intraxia\Jaxion\Axolotl\Collection;
@@ -100,10 +101,20 @@ abstract class AbstractRepository implements Repository {
 						}
 					}
 					break;
+				case 'commits':
+					$value = $this->em->find_by( Commit::class, array_merge( $params, array(
+						'repo_id'     => $model->get_primary_id(),
+						'post_status' => 'any',
+						'order'       => 'ASC',
+						'orderby'     => 'date',
+					) ) );
+					break;
 			}
 
 			if ( null !== $value ) {
+				$model->unguard();
 				$model->set_attribute( $key, $value );
+				$model->reguard();
 			}
 		}
 
