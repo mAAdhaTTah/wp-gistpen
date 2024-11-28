@@ -54,7 +54,7 @@
     "@types/recompose": "^0.30.7",
     "@types/sinon": "^9.0.4",
     "@types/sprintf-js": "^1.1.2",
-    "@types/webpack": "^4.41.13",
+    "@types/webpack": "^5.28.0",
     "@types/webpack-dev-server": "^3.11.0",
     "@types/webpack-env": "^1.15.2",
     "@types/wordpress__block-editor": "^2.2.8",
