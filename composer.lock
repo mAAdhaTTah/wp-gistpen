@@ -535,21 +535,29 @@
             "time": "2015-06-14T21:17:01+00:00"
         },
         {
-            "name": "fzaninotto/faker",
-            "version": "v1.9.1",
+            "name": "fakerphp/faker",
+            "version": "v1.9.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/fzaninotto/Faker.git",
-                "reference": "fc10d778e4b84d5bd315dad194661e091d307c6f"
+                "url": "https://github.com/FakerPHP/Faker.git",
+                "reference": "84220cf137a9344acffb10374e781fed785ff307"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fzaninotto/Faker/zipball/fc10d778e4b84d5bd315dad194661e091d307c6f",
-                "reference": "fc10d778e4b84d5bd315dad194661e091d307c6f",
+                "url": "https://api.github.com/repos/FakerPHP/Faker/zipball/84220cf137a9344acffb10374e781fed785ff307",
+                "reference": "84220cf137a9344acffb10374e781fed785ff307",
                 "shasum": ""
             },
             "require": {
                 "php": "^5.3.3 || ^7.0"
+            },
+            "conflict": {
+                "ergebnis/faker": "!=1.9.2",
+                "fzaninotto/faker": "!=1.9.2"
+            },
+            "replace": {
+                "ergebnis/faker": "1.9.2",
+                "fzaninotto/faker": "1.9.2"
             },
             "require-dev": {
                 "ext-intl": "*",
@@ -557,11 +565,6 @@
                 "squizlabs/php_codesniffer": "^2.9.2"
             },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.9-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "Faker\\": "src/Faker/"
@@ -582,7 +585,7 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2019-12-12T13:22:17+00:00"
+            "time": "2020-12-11T14:32:13+00:00"
         },
         {
             "name": "hamcrest/hamcrest-php",
@@ -739,29 +742,29 @@
         },
         {
             "name": "league/factory-muffin-faker",
-            "version": "v2.2.2",
+            "version": "v2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/factory-muffin-faker.git",
-                "reference": "07f55317db9720cd750a196fa8bc41142d8ce0ca"
+                "reference": "258068c840e8fdc45d1cb1636a0890e92f2e864a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/factory-muffin-faker/zipball/07f55317db9720cd750a196fa8bc41142d8ce0ca",
-                "reference": "07f55317db9720cd750a196fa8bc41142d8ce0ca",
+                "url": "https://api.github.com/repos/thephpleague/factory-muffin-faker/zipball/258068c840e8fdc45d1cb1636a0890e92f2e864a",
+                "reference": "258068c840e8fdc45d1cb1636a0890e92f2e864a",
                 "shasum": ""
             },
             "require": {
-                "fzaninotto/faker": "^1.6",
+                "fakerphp/faker": "^1.9.1",
                 "php": ">=5.4.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^4.8.36|^5.6.3"
+                "phpunit/phpunit": "^4.8.36 || ^5.7.27 || ^6.5.14 || ^7.5.20"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.2-dev"
+                    "dev-master": "2.3-dev"
                 }
             },
             "autoload": {
@@ -796,7 +799,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-04-12T21:50:53+00:00"
+            "time": "2020-12-13T15:53:28+00:00"
         },
         {
             "name": "mockery/mockery",
@@ -1410,6 +1413,7 @@
             "keywords": [
                 "tokenizer"
             ],
+            "abandoned": true,
             "time": "2017-12-04T08:55:13+00:00"
         },
         {
